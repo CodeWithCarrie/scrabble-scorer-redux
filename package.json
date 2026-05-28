@@ -1,0 +1,12 @@
+{
+  "name": "scrabble-scorer-2026",
+  "version": "1.0.0",
+  "description": "demo for students covering functions, objects, and more JS fundamentals",
+  "license": "ISC",
+  "author": "Code With Carrie",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
