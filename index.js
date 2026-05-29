@@ -24,102 +24,139 @@ function oldScrabbleScorer(word) {
 	return letterPoints;
 }
 
-// your job is to finish writing these functions and variables that we've named //
-// don't change the names or your program won't work as expected. //
+// TODO: Test original code that will be replaced
 
-// TODO: Task 1 (Modify in Task 2);
-function initialPrompt() {
-	console.log("Let's play some scrabble!\n");
-	let word = input.question('Enter a word to score: ');
-	return word;
-}
+/* 
+    The code above represents a simple program where you enter a word and receive
+    a letter-by-letter report on the point values.
 
-// TODO: Task 2 - Define function
-let simpleScorer = function (word) {
-	return word.length;
-};
+    What improvements do you see that could be made? 
+        - UX: The user would probably rather just have a total, not a breakdown!
+        - Code efficiency: Why are we looping twice? Can we improve on the 
+          oldPointStructure object to make individual letter score lookup easier?
 
-// TODO: Task 2 - Define function
-let vowelBonusScorer = function (word) {
-	let score = 0;
-	let vowels = 'aeiou';
-	for (let i = 0; i < word.length; i++) {
-		if (vowels.includes(word[i].toLowerCase())) {
-			score += 3;
-		} else {
-			score += 1;
-		}
-	}
-	return score;
-};
+    Here are the new requirements:
+        - A new Scrabble points object by writing logic to transform the old one
+        - A new Scrabble Scorer function to return a total score without logging it
+        - Two additional scoring modes: 
+            - Simple Scorer (1pt for every letter)
+            - Vowel Bonus Scorer (1 pt for consonants, 3 pts for vowels)
+        - A data structure with objects for all three modes that have name and 
+          description properties as well as a method that points to the specific
+          scoring function for that mode
+        - A primary runProgram() function that will handle the interactions 
+          with the user and the general flow
+        - Helper functions for input validation and safeguards (like case insensitivity)
+        - Program should be loopable until the user asks to end program
+        - After they select a scoring mode, they should be able to submit multiple
+          words for scoring until they want to switch scoring mode or end program
+        - Instructions should be displayed once at the start but be available
+          to display again at any time if the user requests it
+*/
 
-// TODO: Task 4 (Move above scrabbleScorer to put it in scope)
-let newPointStructure = transform(oldPointStructure);
+/** SIMPLE SCORER **/
 
-// Bonus mission 2 - doesn't make unit test fail if it's done here
-newPointStructure[' '] = 0;
+/* 
+    TODO: Define simpleScorer function that returns a score calculated
+    using 1 point for each letter in the word
+*/
 
-let scrabbleScorer = function (word) {
-	let score = 0;
-	for (let i = 0; i < word.length; i++) {
-		score += newPointStructure[word[i].toLowerCase()];
-	}
-	return score;
-};
+/** VOWEL BONUS SCORER **/
 
-// TODO: Task 2 (Update in Task 4)
-const scoringAlgorithms = [
-	// Object 1 - Simple Score
-	{
-		name: 'Simple',
-		description: 'Each letter is worth 1 point.',
-		scorerFunction: simpleScorer,
-	},
-	// Object 2 - Bonus Vowels
-	{
-		name: 'Bonus Vowels',
-		description: 'Vowels are 3 points, consonants are 1 point.',
-		scorerFunction: vowelBonusScorer,
-	},
-	// Object 3 - Scrabble
-	{
-		name: 'Scrabble',
-		description: 'The traditional scoring algorithm.',
-		scorerFunction: scrabbleScorer,
-	},
-];
+/* 
+    TODO: Define vowelBonusScorer function that returns a score calculated
+    using 1 point for each consonant and 3 points for each vowel
+*/
 
-// TODO: Task 2
-function scorerPrompt() {
-	console.log('Which scoring algorithm would you like to use?\n');
-	let optionsText = '';
-	for (let i = 0; i < scoringAlgorithms.length; i++) {
-		optionsText += `\n${i} - ${scoringAlgorithms[i].name}: ${scoringAlgorithms[i].description}`;
-	}
-	let choice = input.question(optionsText + '\nEnter a number: ');
-	// Bonus mission 1 - validate
-	while (isNaN(choice) || choice < 0 || choice > 2) {
-		choice = input.question('Please enter 0, 1, or 2: ');
-	}
-	return scoringAlgorithms[choice];
-}
+/** NEW SCRABBLE SCORER **/
 
-// TODO: Task 4
-function transform(oldStructure) {
-	let newStructure = {};
-	for (let pointValue in oldStructure) {
-		for (let i = 0; i < oldStructure[pointValue].length; i++) {
-			let letter = oldStructure[pointValue][i];
-			newStructure[letter.toLowerCase()] = Number(pointValue);
-		}
-	}
-	return newStructure;
-}
+/* 
+    TODO: Define function to transform old score object and return a new one
+*/
 
-// TODO: Task 2
+/* 
+    TODO: Create newPointStructure by calling transform function
+*/
+
+/* 
+    TODO: Define newScrabbleScorer that returns a score calculated
+    using the point values in newPointStructure
+*/
+
+/** DATA STRUCTURE TO FACILITATE GAMEPLAY **/
+
+/* 
+    TODO: Create a data structure that will make it easy to associate a 
+    user's selected scoring mode based on them entering 0, 1, or 2;
+    for each mode we also need a name and a short description for 
+    presenting options. 
+*/
+
+/** USER INPUT VALIDATION HELPER FUNCTIONS **/
+
+/* 
+    TODO: Check for valid number that is in range as an index within an array
+*/
+
+/* 
+    TODO: Check if word is alpha only (without RegEx)
+*/
+
+/* 
+    TODO: Check if user wants to quit
+*/
+
+/* 
+    TODO: Check if user wants to switch scoring mode
+*/
+
+/* 
+    TODO: Check if user wants to see instructions again
+*/
+
+/** TASK-BASED HELPER FUNCTIONS */
+
+/*
+    TODO: Define a function to give the user instructions. It should be used
+    once after the greeting but also be reusable if they want to view it
+    again.
+*/
+
+/* 
+    TODO: Define a function to handle user input for scoring mode selection;
+    it should return the scoring mode object (not the validated input)
+*/
+
+/* 
+    TODO: Define a function to handle user input for word to be scored;
+    it should return a word that has only alpha characters
+*/
+
+/*
+    TODO: Create the primary function to run the entire program. 
+    Make use of helper functions where needed.
+*/
 function runProgram() {
-	let word = initialPrompt();
-	let scorer = scorerPrompt();
-	let score = scorer.scorerFunction(word);
-	console.log(`Score for '${word}': ${score}`);
+	// TODO: Welcome the user
+
+	// TODO: Display instructions initially
+
+	// TODO: Keep word and scorerObj in scope for all nested mechanisms
+
+	// TODO: Run interactive program lifecycle until user wants to quit
+	//      TODO: Ask user for scorer mode selection
+
+	//      TODO: Keep asking for new words until they either quit
+	//          or want to switch to a different scoring mode
+	//          TODO: Ask user for word
+
+	//          TODO: Check for keywords before scoring
+	//              TODO: Break loop if quitting or switching scoring modes
+	//              TODO: Display instructions again if asking for help
+	//              TODO: Score only if no keyword was entered
+
+	// TODO: Log a friendly signoff after user specifies they want to quit
 }
+
+// TODO: Nothing will happen in the console without actually running the program!
+runProgram();
