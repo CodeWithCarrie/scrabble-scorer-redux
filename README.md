@@ -19,44 +19,47 @@ You will write and interactive console application that provides a fun way for s
 #### The Purpose
 
 This exercise is to help you connect the dots between the many fundamental concepts you've learned: data types, data structures, conditionals, loops, functions, and objects. Even more importantly,
-you will learn how to plan and execute a more complex application, building your problem-solving skills and teaching you solid patterns like using helper functions and including user input validation. 
+you will learn how to plan and execute a more complex application, building your problem-solving skills and teaching you solid patterns like using helper functions and including user input validation.
 
 #### The Problem
 
-Take a look at `index.js`. So far, this merelly represents a simple program where you enter a word and receive a letter-by-letter report on the point values. The existing code at the top is inefficient and ineffectual.
+Take a look at `index.js`. The existing code represents a simple program where you enter a word and receive a letter-by-letter report on the point values — but it is inefficient and ineffectual.
 
-_Ask yourself: What improvements do you see that could be made?_ 
-- User Experience (UX): The user would probably rather just have a total, not a breakdown!
+_Ask yourself: What improvements could be made?_
+
 - Code efficiency: Why are we looping twice? Can we improve on the oldPointStructure object to make individual letter score lookup easier?
+- User Experience (UX): The user would probably rather just have a total, not a breakdown!
 
 #### Instructions
 
-Your goal is to build a bigger, more robust, more efficient interactive program. 
+Your goal is to build a bigger, more robust, more efficient interactive program.
+
 1. Read through the Project Requirements below.
 2. Follow the TODOs in `index.js` by number (1, 2A, 2B, etc.).
 
 > [!IMPORTANT]
-> Now that you have learned about functions, you should no longer think of your code as always running from top to bottom entirely. When a program is heavily composed of functions, all of those code blocks are out of scope of the main file flow until they're needed and called. 
-> 
+> Now that you have learned about functions, you should no longer think of your code as always running from top to bottom entirely. When a program is heavily composed of functions, all of those code blocks are out of scope of the main file flow until they're needed and called.
+>
 > As a result, **TODOs should be completed by number order**, NOT in the order in which they appear from top to bottom!
 
 #### Project Requirements
+
 - A new Scrabble points object by writing logic to transform the old one
 - A new Scrabble Scorer function to return a total score without logging it
-- Two additional scoring modes: 
-    - Simple Scorer (1pt for every letter)
-    - Vowel Bonus Scorer (1 pt for consonants, 3 pts for vowels)
-- A data structure with objects for all three modes that have name and 
-description properties as well as a method that points to the specific
-scoring function for that mode
-- A primary runProgram() function that will handle the interactions 
-with the user and the general flow
+- Two additional scoring modes:
+  - Simple Scorer (1pt for every letter)
+  - Vowel Bonus Scorer (1 pt for consonants, 3 pts for vowels)
+- A data structure with objects for all three modes that have name and
+  description properties as well as a method that points to the specific
+  scoring function for that mode
+- A primary runProgram() function that will handle the interactions
+  with the user and the general flow
 - Helper functions for input validation and safeguards (like case insensitivity)
 - Program should be loopable until the user asks to end program
 - After they select a scoring mode, they should be able to submit multiple
-words for scoring until they want to switch scoring mode or end program
+  words for scoring until they want to switch scoring mode or end program
 - Instructions should be displayed once at the start but be available
-to display again at any time if the user requests it
+  to display again at any time if the user requests it
 
 ---
 
@@ -83,8 +86,8 @@ It will go much easier if you don't ever change the code in `main`. Instead, do 
 
 ## ABOUT THE AUTHOR
 
-### Caroline "Carrie" Jones 
+### Caroline "Carrie" Jones
 
-Front End Engineer and Lead Instructor at [LaunchCode](https://www.launchcode.org) 
+Front End Engineer and Lead Instructor at [LaunchCode](https://www.launchcode.org)
 
 [@Carolista](https://github.com/Carolista) - [CodeWithCarrie.com](http://codewithcarrie.com) - [LinkedIn](https://www.linkedin.com/in/carolinerjones)
