@@ -1,5 +1,6 @@
 const input = require('readline-sync');
 
+// New point structure is now derived from this
 const oldPointStructure = {
     1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
     2: ['D', 'G'],
@@ -10,6 +11,7 @@ const oldPointStructure = {
     10: ['Q', 'Z'],
 };
 
+// No longer in use; remains only for comparison
 function oldScrabbleScorer(word) {
     word = word.toUpperCase();
     let letterPoints = '';
@@ -24,20 +26,12 @@ function oldScrabbleScorer(word) {
     return letterPoints;
 }
 
-// Temporary visualization of original code that needs to be replaced
+// Temporary visualization of original code that needed to be replaced
 // console.log(oldScrabbleScorer("JavaScript"));
 // console.log(oldScrabbleScorer("rutabaga"));
 
 /* 
-    The code above represents a simple program where you enter a word and receive
-    a letter-by-letter report on the point values.
-
-    What improvements do you see that could be made? 
-        - UX: The user would probably rather just have a total, not a breakdown!
-        - Code efficiency: Why are we looping twice? Can we improve on the 
-          oldPointStructure object to make individual letter score lookup easier?
-
-    Here are the new requirements:
+    New requirements met by the code below:
         - A new Scrabble points object by writing logic to transform the old one
         - A new Scrabble Scorer function to return a total score without logging it
         - Two additional scoring modes: 
@@ -138,17 +132,12 @@ const scoringModes = [
 ];
 
 /** USER INPUT VALIDATION HELPER FUNCTIONS **/
-/* 
-    Checks for valid number that is in range as an index within an array
-*/
+
 function isValidIndex(index, array) {
     index = Number(index);
     return !isNaN(index) && index >= 0 && index < array.length;
 }
 
-/* 
-    Checks if word is alpha only (without RegEx)
-*/
 function isValidWord(word) {
     if (word.trim().length === 0) return false;
     const allowed = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -158,23 +147,14 @@ function isValidWord(word) {
     return true;
 }
 
-/* 
-    Checks if user wants to quit
-*/
 function shouldQuit(word) {
     return word.toUpperCase().trim() === 'QUIT';
 }
 
-/* 
-    Checks if user wants to switch scoring mode
-*/
 function shouldSwitchMode(word) {
     return word.toUpperCase().trim() === 'SWITCH';
 }
 
-/* 
-    Checks if user wants to see instructions again
-*/
 function shouldDisplayInstructions(word) {
     return word.toUpperCase().trim() === 'HELP';
 }
@@ -185,7 +165,6 @@ function shouldDisplayInstructions(word) {
     Gives the user instructions; reusable if they need a reminder
 */
 function displayInstructions() {
-    // Explain how to play, how to quit, and how to switch modes
     console.log('\nSelect from one of three scoring modes:');
     for (let mode of scoringModes) {
         console.log(`  ${mode.name}: ${mode.description}`);
@@ -205,7 +184,7 @@ Have fun!`);
     returning the scoring mode object using the input as an index
 */
 function getScoringModeFromUser() {
-    // Display options and ask user to select a scoring mode
+    
     console.log('\nWhich scoring mode would you like to use?');
     let optionsText = '';
     for (let i = 0; i < scoringModes.length; i++) {
@@ -214,11 +193,10 @@ function getScoringModeFromUser() {
     }
     let selection = input.question(optionsText + '\n\nEnter a number: ');
 
-    // Validate user input using a more specific message if needed
     while (!isValidIndex(selection, scoringModes)) {
         selection = input.question('\nPlease enter a valid number from the options presented: ');
     }
-    // Return the object associated with their selection
+
     return scoringModes[selection];
 }
 
@@ -242,42 +220,32 @@ function getWordFromUser() {
     details of subroutines, just handles flow of program lifecycle
 */
 function runProgram() {
-    // Welcome the user
+
     console.log('\nWELCOME TO SCRABBLE SCORER!');
 
-    // Display instructions initially
     displayInstructions();
 
-    // Keep word and scorerObj in scope for all nested mechanisms
     let word = '';
     let scorerObj;
 
-    // Run interactive program lifecycle until user wants to quit
     do {
-        // Ask user for scorer mode selection
         scorerObj = getScoringModeFromUser();
 
-        // Keep asking for new words until they either quit
-        // or want to switch to a different scoring mode
         while (true) {
-            // Ask user for word
             word = getWordFromUser();
 
-            // Check for keywords that generate actions without scoring
             if (shouldQuit(word) || shouldSwitchMode(word)) break;
             if (shouldDisplayInstructions(word)) {
                 displayInstructions();
             } else {
-                // Score only if no keyword was entered
                 let score = scorerObj.scoreWord(word);
                 console.log(`Score for '${word}': ${score}`);
             }
         }
     } while (!shouldQuit(word));
 
-    // Log a friendly signoff after user specifies they want to quit
     console.log('\n\nThanks for playing!\n');
 }
 
-// Nothing will happen in the console without actually running the program!
+// Aaaaaand... go!
 runProgram();
