@@ -26,29 +26,13 @@ function oldScrabbleScorer(word) {
     return letterPoints;
 }
 
+/* 
+    See README for full instructions and project requirements.
+*/
+
 // Temporary visualization of original code that needed to be replaced
 // console.log(oldScrabbleScorer("JavaScript"));
 // console.log(oldScrabbleScorer("rutabaga"));
-
-/* 
-    New requirements met by the code below:
-        - A new Scrabble points object by writing logic to transform the old one
-        - A new Scrabble Scorer function to return a total score without logging it
-        - Two additional scoring modes: 
-            - Simple Scorer (1pt for every letter)
-            - Vowel Bonus Scorer (1 pt for consonants, 3 pts for vowels)
-        - A data structure with objects for all three modes that have name and 
-          description properties as well as a method that points to the specific
-          scoring function for that mode
-        - A primary runProgram() function that will handle the interactions 
-          with the user and the general flow
-        - Helper functions for input validation and safeguards (like case insensitivity)
-        - Program should be loopable until the user asks to end program
-        - After they select a scoring mode, they should be able to submit multiple
-          words for scoring until they want to switch scoring mode or end program
-        - Instructions should be displayed once at the start but be available
-          to display again at any time if the user requests it
-*/
 
 /** SIMPLE SCORER **/
 

@@ -24,40 +24,11 @@ function oldScrabbleScorer(word) {
 	return letterPoints;
 }
 
-// TODO #1: Temporarily test original code to see output
-
 /* 
-    The code above represents a simple program where you enter a word and receive
-    a letter-by-letter report on the point values.
-
-    What improvements do you see that could be made? 
-        - UX: The user would probably rather just have a total, not a breakdown!
-        - Code efficiency: Why are we looping twice? Can we improve on the 
-          oldPointStructure object to make individual letter score lookup easier?
-
-    Here are the new requirements:
-        - A new Scrabble points object by writing logic to transform the old one
-        - A new Scrabble Scorer function to return a total score without logging it
-        - Two additional scoring modes: 
-            - Simple Scorer (1pt for every letter)
-            - Vowel Bonus Scorer (1 pt for consonants, 3 pts for vowels)
-        - A data structure with objects for all three modes that have name and 
-          description properties as well as a method that points to the specific
-          scoring function for that mode
-        - A primary runProgram() function that will handle the interactions 
-          with the user and the general flow
-        - Helper functions for input validation and safeguards (like case insensitivity)
-        - Program should be loopable until the user asks to end program
-        - After they select a scoring mode, they should be able to submit multiple
-          words for scoring until they want to switch scoring mode or end program
-        - Instructions should be displayed once at the start but be available
-          to display again at any time if the user requests it
-
-    NOTE: You should no longer think of programs as running from top to bottom entirely. 
-    When a program is heavily composed of functions, all of those code blocks are out of 
-    scope of the main file flow until they're needed and called. As a result, TODOs should 
-    be completed by number order, NOT in the order in which they appear from top to bottom.
+    See README for full instructions and project requirements.
 */
+
+// TODO #1: Temporarily test original function to see output. Delete your log statements after testing.
 
 /** SIMPLE SCORER **/
 
