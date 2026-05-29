@@ -52,6 +52,11 @@ function oldScrabbleScorer(word) {
           words for scoring until they want to switch scoring mode or end program
         - Instructions should be displayed once at the start but be available
           to display again at any time if the user requests it
+
+    NOTE: You should no longer think of programs as running from top to bottom entirely. 
+    When a program is heavily composed of functions, all of those code blocks are out of 
+    scope of the main file flow until they're needed and called. As a result, TODOs should 
+    be completed by number order, NOT in the order in which they appear from top to bottom.
 */
 
 /** SIMPLE SCORER **/
@@ -154,20 +159,24 @@ function oldScrabbleScorer(word) {
 */
 function runProgram() {
 	// TODO #7A: Welcome the user
+
 	// TODO #8B: Display instructions initially
+
 	// TODO #9C: Declare scorerObj (do not initialize)
 	// TODO #10C: Declare word (do not initialize)
+
 	// TODO #11C: Run iterative program lifecycle until user wants to quit
 	//      TODO #9D: Ask user for scorer mode selection
 	//      TODO #9E: Temporarily log scorerObj to see result and test various inputs
-	//      TODO #11D: Keep asking for new words until they either quit
-	//                  or want to switch to a different scoring mode
+
+	//      TODO #11D: Keep asking for new words until they enter QUIT or SWITCH
 	//          TODO #10D: Ask user for word
-	//          TODO #11E: Check for keywords before scoring
-	//              TODO #11F: Break loop if quitting or switching scoring modes
-	//              TODO #12B: Display instructions again if asking for help
-	//              TODO #10E: Get score; display word & its score 
-    //              TODO #12C: Ensure scoring happens only if no keyword was given
+    
+	//          TODO #11E: Check for keywords before scoring; break loop if QUIT or SWITCH 
+    //          TODO #12B: Display instructions again if asking for help
+    //          TODO #12C: Ensure scoring happens only if no keyword was given
+    //          TODO #10E: Get score; display word & its score 
+
 	// TODO #13: Log a friendly signoff after outer loop exits
 }
 
