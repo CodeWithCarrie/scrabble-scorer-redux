@@ -225,8 +225,8 @@ function runProgram() {
 
     displayInstructions();
 
-    let word = '';
     let scorerObj;
+    let word;
 
     do {
         scorerObj = getScoringModeFromUser();
