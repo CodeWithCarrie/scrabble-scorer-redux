@@ -24,7 +24,7 @@ function oldScrabbleScorer(word) {
     return letterPoints;
 }
 
-// Test original code that will be replaced
+// Temporary visualization of original code that needs to be replaced
 // console.log(oldScrabbleScorer("JavaScript"));
 // console.log(oldScrabbleScorer("rutabaga"));
 
@@ -59,16 +59,14 @@ function oldScrabbleScorer(word) {
 /** SIMPLE SCORER **/
 
 /* 
-    Define simpleScorer function that returns a score calculated
-    using 1 point for each letter in the word
+    Returns a score calculated using 1 point for each letter in the word
 */
 const simpleScorer = word => word.length;
 
 /** VOWEL BONUS SCORER **/
 
 /* 
-    Define vowelBonusScorer function that returns a score calculated
-    using 1 point for each consonant and 3 points for each vowel
+    Returns a score calculated using 1 point per consonant and 3 points per vowel
 */
 const vowelBonusScorer = word => {
     let score = 0;
@@ -86,7 +84,7 @@ const vowelBonusScorer = word => {
 /** NEW SCRABBLE SCORER **/
 
 /* 
-    Define function to transform old score object and return a new one
+    Transforms old score object and returns a new one
 */
 function transformScrabblePointStructure() {
     let newStructure = {};
@@ -99,13 +97,12 @@ function transformScrabblePointStructure() {
 }
 
 /* 
-    Create newPointStructure by calling transform function
+    New, more efficient data structure for point lookup
 */
 const newPointStructure = transformScrabblePointStructure();
 
 /* 
-    Define newScrabbleScorer that returns a score calculated
-    using the point values in newPointStructure
+    Returns a score calculated using newPointStructure
 */
 const newScrabbleScorer = word => {
     let score = 0;
@@ -118,10 +115,9 @@ const newScrabbleScorer = word => {
 /** DATA STRUCTURE TO FACILITATE GAMEPLAY **/
 
 /* 
-    Create a data structure that will make it easy to associate a 
-    user's selected scoring mode based on them entering 0, 1, or 2;
-    for each mode we also need a name and a short description for 
-    presenting options. 
+    Makes it easy to access a user's selected scoring mode based on 
+    them entering 0-2; associates name and a short description with
+    method pointing to specific scoring functions 
 */
 const scoringModes = [
     {
@@ -143,7 +139,7 @@ const scoringModes = [
 
 /** USER INPUT VALIDATION HELPER FUNCTIONS **/
 /* 
-    Check for valid number that is in range as an index within an array
+    Checks for valid number that is in range as an index within an array
 */
 function isValidIndex(index, array) {
     index = Number(index);
@@ -151,7 +147,7 @@ function isValidIndex(index, array) {
 }
 
 /* 
-    Check if word is alpha only (without RegEx)
+    Checks if word is alpha only (without RegEx)
 */
 function isValidWord(word) {
     const allowed = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -162,21 +158,21 @@ function isValidWord(word) {
 }
 
 /* 
-    Check if user wants to quit
+    Checks if user wants to quit
 */
 function shouldQuit(word) {
     return word.toUpperCase().trim() === 'QUIT';
 }
 
 /* 
-    Check if user wants to switch scoring mode
+    Checks if user wants to switch scoring mode
 */
 function shouldSwitchMode(word) {
     return word.toUpperCase().trim() === 'SWITCH';
 }
 
 /* 
-    Check if user wants to see instructions again
+    Checks if user wants to see instructions again
 */
 function shouldDisplayInstructions(word) {
     return word.toUpperCase().trim() === 'HELP';
@@ -185,9 +181,7 @@ function shouldDisplayInstructions(word) {
 /** TASK-BASED HELPER FUNCTIONS */
 
 /*
-    Define a function to give the user instructions. It should be used
-    once after the greeting but also be reusable if they want to view it
-    again.
+    Gives the user instructions; reusable if they need a reminder
 */
 function displayInstructions() {
     // Explain how to play, how to quit, and how to switch modes
@@ -205,8 +199,9 @@ Have fun!`);
 }
 
 /* 
-    Define a function to handle user input for scoring mode selection;
-    it should return the scoring mode object (not the validated input)
+    Handles full sequence for asking for and retrieving user input for 
+    scoring mode selection, validating input (numeric index in range), and
+    returning the scoring mode object using the input as an index
 */
 function getScoringModeFromUser() {
     // Display options and ask user to select a scoring mode
@@ -227,8 +222,9 @@ function getScoringModeFromUser() {
 }
 
 /* 
-    Define a function to handle user input for word to be scored;
-    it should return a word that has only alpha characters
+    Handles full sequence for asking for and retrieving user input 
+    for word to be scored, validating the input (alpha only), and 
+    returning the input
 */
 function getWordFromUser() {
     let word = input.question('\nEnter a word to score: \n');
@@ -241,8 +237,8 @@ function getWordFromUser() {
 }
 
 /*
-    Create the primary function to run the entire program. 
-    Make use of helper functions where needed.
+    The primary function to run the entire program. Is not concerned with
+    details of subroutines, just handles flow of program lifecycle
 */
 function runProgram() {
     // Welcome the user

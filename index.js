@@ -24,7 +24,7 @@ function oldScrabbleScorer(word) {
 	return letterPoints;
 }
 
-// TODO: Test original code that will be replaced
+// TODO: Temporarily test original code that will be replaced to see output
 
 /* 
     The code above represents a simple program where you enter a word and receive
