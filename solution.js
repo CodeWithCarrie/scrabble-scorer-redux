@@ -150,6 +150,7 @@ function isValidIndex(index, array) {
     Checks if word is alpha only (without RegEx)
 */
 function isValidWord(word) {
+    if (word.trim().length === 0) return false;
     const allowed = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     for (let letter of word) {
         if (!allowed.includes(letter)) return false;
@@ -215,7 +216,7 @@ function getScoringModeFromUser() {
 
     // Validate user input using a more specific message if needed
     while (!isValidIndex(selection, scoringModes)) {
-        selection = input.question('\nPlease enter 0, 1, or 2: ');
+        selection = input.question('\nPlease enter a valid number from the options presented: ');
     }
     // Return the object associated with their selection
     return scoringModes[selection];
@@ -263,7 +264,7 @@ function runProgram() {
             word = getWordFromUser();
 
             // Check for keywords that generate actions without scoring
-            if (shouldQuit(word) || shouldSwitch(word)) break;
+            if (shouldQuit(word) || shouldSwitchMode(word)) break;
             if (shouldDisplayInstructions(word)) {
                 displayInstructions();
             } else {
