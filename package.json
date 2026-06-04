@@ -1,7 +1,7 @@
 {
-  "name": "scrabble-scorer-2026",
+  "name": "scrabble-scorer-redux",
   "version": "1.0.0",
-  "description": "demo for students covering functions, objects, and more JS fundamentals",
+  "description": "Demo for students covering functions, objects, and other JS fundamentals",
   "license": "ISC",
   "author": "Code With Carrie",
   "type": "commonjs",
