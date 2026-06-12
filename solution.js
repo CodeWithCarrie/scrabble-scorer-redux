@@ -2,28 +2,28 @@ const input = require('readline-sync');
 
 // New point structure is now derived from this
 const oldPointStructure = {
-    1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
-    2: ['D', 'G'],
-    3: ['B', 'C', 'M', 'P'],
-    4: ['F', 'H', 'V', 'W', 'Y'],
-    5: ['K'],
-    8: ['J', 'X'],
-    10: ['Q', 'Z'],
+	1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
+	2: ['D', 'G'],
+	3: ['B', 'C', 'M', 'P'],
+	4: ['F', 'H', 'V', 'W', 'Y'],
+	5: ['K'],
+	8: ['J', 'X'],
+	10: ['Q', 'Z'],
 };
 
 // No longer in use; remains only for comparison
 function oldScrabbleScorer(word) {
-    word = word.toUpperCase();
-    let letterPoints = '';
+	word = word.toUpperCase();
+	let letterPoints = '';
 
-    for (let i = 0; i < word.length; i++) {
-        for (const pointValue in oldPointStructure) {
-            if (oldPointStructure[pointValue].includes(word[i])) {
-                letterPoints += `Points for '${word[i]}': ${pointValue}\n`;
-            }
-        }
-    }
-    return letterPoints;
+	for (let i = 0; i < word.length; i++) {
+		for (const pointValue in oldPointStructure) {
+			if (oldPointStructure[pointValue].includes(word[i])) {
+				letterPoints += `Points for '${word[i]}': ${pointValue}\n`;
+			}
+		}
+	}
+	return letterPoints;
 }
 
 /* 
@@ -47,16 +47,16 @@ const simpleScorer = word => word.length;
     Returns a score calculated using 1 point per consonant and 3 points per vowel
 */
 const vowelBonusScorer = word => {
-    let score = 0;
-    let vowels = 'aeiou';
-    for (let letter of word) {
-        if (vowels.includes(letter.toLowerCase())) {
-            score += 3;
-        } else {
-            score++;
-        }
-    }
-    return score;
+	let score = 0;
+	let vowels = 'aeiou';
+	for (let letter of word) {
+		if (vowels.includes(letter.toLowerCase())) {
+			score += 3;
+		} else {
+			score++;
+		}
+	}
+	return score;
 };
 
 /** NEW SCRABBLE SCORER **/
@@ -65,13 +65,13 @@ const vowelBonusScorer = word => {
     Transforms old score object and returns a new one
 */
 function transformScrabblePointStructure() {
-    let newStructure = {};
-    for (let pointValue in oldPointStructure) {
-        for (let letter of oldPointStructure[pointValue]) {
-            newStructure[letter.toLowerCase()] = Number(pointValue);
-        }
-    }
-    return newStructure;
+	let newStructure = {};
+	for (let pointValue in oldPointStructure) {
+		for (let letter of oldPointStructure[pointValue]) {
+			newStructure[letter.toLowerCase()] = Number(pointValue);
+		}
+	}
+	return newStructure;
 }
 
 /* 
@@ -83,11 +83,11 @@ const newPointStructure = transformScrabblePointStructure();
     Returns a score calculated using newPointStructure
 */
 const newScrabbleScorer = word => {
-    let score = 0;
-    for (let letter of word) {
-        score += newPointStructure[letter.toLowerCase()];
-    }
-    return score;
+	let score = 0;
+	for (let letter of word) {
+		score += newPointStructure[letter.toLowerCase()];
+	}
+	return score;
 };
 
 /** DATA STRUCTURE TO FACILITATE GAMEPLAY **/
@@ -98,49 +98,50 @@ const newScrabbleScorer = word => {
     method pointing to specific scoring functions 
 */
 const scoringModes = [
-    {
-        name: 'Simple',
-        description: 'Each letter is worth 1 point.',
-        scoreWord: simpleScorer,
-    },
-    {
-        name: 'Bonus Vowels',
-        description: 'Vowels are 3 points, consonants are 1 point.',
-        scoreWord: vowelBonusScorer,
-    },
-    {
-        name: 'Scrabble',
-        description: 'Traditional Scrabble points.',
-        scoreWord: newScrabbleScorer,
-    },
+	{
+		name: 'Simple',
+		description: 'Each letter is worth 1 point.',
+		scoreWord: simpleScorer,
+	},
+	{
+		name: 'Bonus Vowels',
+		description: 'Vowels are 3 points, consonants are 1 point.',
+		scoreWord: vowelBonusScorer,
+	},
+	{
+		name: 'Scrabble',
+		description: 'Traditional Scrabble points.',
+		scoreWord: newScrabbleScorer,
+	},
 ];
 
 /** USER INPUT VALIDATION HELPER FUNCTIONS **/
 
 function isValidIndex(index, array) {
-    index = Number(index);
-    return !isNaN(index) && index >= 0 && index < array.length;
+	index = Number(index);
+	return !isNaN(index) && index >= 0 && index < array.length;
 }
 
 function isValidWord(word) {
-    if (word.trim().length === 0) return false;
-    const allowed = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    for (let letter of word) {
-        if (!allowed.includes(letter)) return false;
-    }
-    return true;
+	word = word.trim().toLowerCase();
+	if (word.length === 0) return false;
+	const allowed = 'abcdefghijklmnopqrstuvwxyz';
+	for (let letter of word) {
+		if (!allowed.includes(letter)) return false;
+	}
+	return true;
 }
 
 function shouldQuit(word) {
-    return word.toUpperCase().trim() === 'QUIT';
+	return word.toUpperCase().trim() === 'QUIT';
 }
 
 function shouldSwitchMode(word) {
-    return word.toUpperCase().trim() === 'SWITCH';
+	return word.toUpperCase().trim() === 'SWITCH';
 }
 
 function shouldDisplayInstructions(word) {
-    return word.toUpperCase().trim() === 'HELP';
+	return word.toUpperCase().trim() === 'HELP';
 }
 
 /** TASK-BASED HELPER FUNCTIONS */
@@ -149,11 +150,11 @@ function shouldDisplayInstructions(word) {
     Gives the user instructions; reusable if they need a reminder
 */
 function displayInstructions() {
-    console.log('\nSelect from one of three scoring modes:');
-    for (let mode of scoringModes) {
-        console.log(`  ${mode.name}: ${mode.description}`);
-    }
-    console.log(`
+	console.log('\nSelect from one of three scoring modes:');
+	for (let mode of scoringModes) {
+		console.log(`  ${mode.name}: ${mode.description}`);
+	}
+	console.log(`
 You may enter any word as long as it contains only alphabetical characters.
   - Enter 'QUIT' instead to end the program. 
   - Enter 'SWITCH' to switch scoring modes.
@@ -168,20 +169,21 @@ Have fun!`);
     returning the scoring mode object using the input as an index
 */
 function getScoringModeFromUser() {
-    
-    console.log('\nWhich scoring mode would you like to use?');
-    let optionsText = '';
-    for (let i = 0; i < scoringModes.length; i++) {
-        let option = scoringModes[i];
-        optionsText += `\n${i} - ${option.name}: ${option.description}`;
-    }
-    let selection = input.question(optionsText + '\n\nEnter a number: ');
+	console.log('\nWhich scoring mode would you like to use?');
+	let optionsText = '';
+	for (let i = 0; i < scoringModes.length; i++) {
+		let option = scoringModes[i];
+		optionsText += `\n${i} - ${option.name}: ${option.description}`;
+	}
+	let selection = input.question(optionsText + '\n\nEnter a number: ');
 
-    while (!isValidIndex(selection, scoringModes)) {
-        selection = input.question('\nPlease enter a valid number from the options presented: ');
-    }
+	while (!isValidIndex(selection, scoringModes)) {
+		selection = input.question(
+			'\nPlease enter a valid number from the options presented: ',
+		);
+	}
 
-    return scoringModes[selection];
+	return scoringModes[selection];
 }
 
 /* 
@@ -190,13 +192,13 @@ function getScoringModeFromUser() {
     returning the input
 */
 function getWordFromUser() {
-    let word = input.question('\nEnter a word to score: \n');
-    while (!isValidWord(word)) {
-        word = input.question(
-            '\nInvalid word. \nPlease enter a word with no spaces, numbers, symbols, or punctuation. \n',
-        );
-    }
-    return word;
+	let word = input.question('\nEnter a word to score: \n');
+	while (!isValidWord(word)) {
+		word = input.question(
+			'\nInvalid word. \nPlease enter a word with no spaces, numbers, symbols, or punctuation. \n',
+		);
+	}
+	return word;
 }
 
 /*
@@ -204,31 +206,29 @@ function getWordFromUser() {
     details of subroutines, just handles flow of program lifecycle
 */
 function runProgram() {
+	console.log('\nWELCOME TO SCRABBLE SCORER!');
 
-    console.log('\nWELCOME TO SCRABBLE SCORER!');
+	displayInstructions();
 
-    displayInstructions();
+	let scorerObj;
+	let word;
 
-    let scorerObj;
-    let word;
+	do {
+		scorerObj = getScoringModeFromUser();
 
-    do {
-        scorerObj = getScoringModeFromUser();
+		while (true) {
+			word = getWordFromUser();
 
-        while (true) {
-            word = getWordFromUser();
+			if (shouldQuit(word) || shouldSwitchMode(word)) break;
+			if (shouldDisplayInstructions(word)) displayInstructions();
+			else {
+				let score = scorerObj.scoreWord(word);
+				console.log(`Score for '${word}': ${score}`);
+			}
+		}
+	} while (!shouldQuit(word));
 
-            if (shouldQuit(word) || shouldSwitchMode(word)) break;
-            if (shouldDisplayInstructions(word)) {
-                displayInstructions();
-            } else {
-                let score = scorerObj.scoreWord(word);
-                console.log(`Score for '${word}': ${score}`);
-            }
-        }
-    } while (!shouldQuit(word));
-
-    console.log('\n\nThanks for playing!\n');
+	console.log('\n\nThanks for playing!\n');
 }
 
 // Aaaaaand... go!
