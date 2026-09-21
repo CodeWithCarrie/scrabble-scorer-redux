@@ -34,6 +34,24 @@ function oldScrabbleScorer(word) {
 // console.log(oldScrabbleScorer("JavaScript"));
 // console.log(oldScrabbleScorer("rutabaga"));
 
+/* 
+    Transforms old score object and returns a new one
+*/
+function transformScrabblePointStructure() {
+	let newStructure = {};
+	for (let pointValue in oldPointStructure) {
+		for (let letter of oldPointStructure[pointValue]) {
+			newStructure[letter.toLowerCase()] = Number(pointValue);
+		}
+	}
+	return newStructure;
+}
+
+/* 
+    New, more efficient data structure for point lookup
+*/
+const newPointStructure = transformScrabblePointStructure();
+
 /** SIMPLE SCORER **/
 
 /* 
@@ -59,25 +77,7 @@ const vowelBonusScorer = word => {
 	return score;
 };
 
-/** NEW SCRABBLE SCORER **/
-
-/* 
-    Transforms old score object and returns a new one
-*/
-function transformScrabblePointStructure() {
-	let newStructure = {};
-	for (let pointValue in oldPointStructure) {
-		for (let letter of oldPointStructure[pointValue]) {
-			newStructure[letter.toLowerCase()] = Number(pointValue);
-		}
-	}
-	return newStructure;
-}
-
-/* 
-    New, more efficient data structure for point lookup
-*/
-const newPointStructure = transformScrabblePointStructure();
+/** NEW SCRABBLE CORER **/
 
 /* 
     Returns a score calculated using newPointStructure
@@ -219,12 +219,12 @@ function runProgram() {
 		while (true) {
 			word = getWordFromUser();
 
-			if (shouldQuit(word) || shouldSwitchMode(word)) break;
 			if (shouldDisplayInstructions(word)) displayInstructions();
 			else {
-				let score = scorerObj.scoreWord(word);
+                let score = scorerObj.scoreWord(word);
 				console.log(`Score for '${word}': ${score}`);
 			}
+            if (shouldQuit(word) || shouldSwitchMode(word)) break;
 		}
 	} while (!shouldQuit(word));
 
