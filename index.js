@@ -30,6 +30,12 @@ function oldScrabbleScorer(word) {
 
 // TODO #1: Temporarily test original function to see output. Delete your log statements after testing.
 
+/* 
+    TODO #4A: Define function to transform old score object and return a new one
+*/
+
+// TODO #4B: Temporarily log the transformed object to inspect shape
+
 /** SIMPLE SCORER **/
 
 /* 
@@ -49,12 +55,6 @@ function oldScrabbleScorer(word) {
 // TODO #3B: Manually test vowelBonusScorer with mixed-case words
 
 /** NEW SCRABBLE SCORER **/
-
-/* 
-    TODO #4A: Define function to transform old score object and return a new one
-*/
-
-// TODO #4B: Temporarily log the transformed object to inspect shape
 
 /* 
     TODO #4C: Create newPointStructure by calling transform function
