@@ -118,7 +118,7 @@ const scoringModes = [
 /** USER INPUT VALIDATION HELPER FUNCTIONS **/
 
 function isValidIndex(index, array) {
-	index = Number(index);
+	index = Number(index.trim());
 	return !isNaN(index) && index >= 0 && index < array.length;
 }
 
